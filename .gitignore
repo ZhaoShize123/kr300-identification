@@ -1,0 +1,16 @@
+# Raw data and regenerable data arrays (see DATA.md)
+data/*
+!data/.gitkeep
+*.rar
+extracted/
+filtered_causal.npz
+residuals.npz
+residuals_corrected.npz
+stage1_e1.npz
+# Environments and caches
+venv/
+.venv/
+__pycache__/
+*.pyc
+# OS / editor
+.DS_Store
