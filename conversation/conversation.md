@@ -182,6 +182,30 @@ criteria never silently relaxed.
   (b) retuned GRU, or (c) accept the slow floor and run the dwell
   experiment. Unpicked.
 - Dwell experiment: proposed, not run, needs new robot data.
-- GitHub target: repo name, new vs existing, public vs private, and
-  authorisation — pending user input.
+- GitHub target: RESOLVED 2026-10-24 — private repo
+  kr300-identification created via browser (user login), App
+  installation authorised for it, first snapshot push commit
+  5b3b0c14a9280bcc9df334c70be1d8da1c43e39e (37 text files;
+  binaries held back by the connector's text-only limit). Private
+  empty repos task1–task5 created the same night.
 - No license chosen for this repo.
+
+### 16. Reproducibility fix + second push (user, 2026-10-25)
+- User requirement: the repo must support FULL reproduction, and
+  must contain the conversation record and detailed code
+  explanations.
+- Audit (against the pushed snapshot, not memory) found: README
+  claimed .npz / stage2_models.pt / PNGs were included, but the
+  first snapshot holds text files only; conversation.md stopped at
+  "push pending" and missed the creation, authorisation, and push;
+  no per-script explanation document existed; requirements pinned
+  only `pin`; data download was manual.
+- Fix in this commit: README inclusion list corrected (snapshot
+  text-only vs local-package binaries, regeneration path stated);
+  CODE.md added (per-script purpose/inputs/outputs/decisions);
+  this section appended; requirements pinned to the tested venv
+  set; download_data.py added (stdlib download + size/MD5 verify;
+  extraction manual, RAR v4; Videos.rar excluded as before).
+- Second snapshot push: this commit, on main, following
+  5b3b0c14a9. Binaries remain off GitHub (same connector limit)
+  and remain regenerable outputs of the pipeline.

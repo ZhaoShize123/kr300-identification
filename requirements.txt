@@ -1,15 +1,23 @@
-# Requirements
-# Tested: system python3 (numpy 1.26.4, scipy 1.11.4, matplotlib 3.6.3)
-# and a venv (numpy 2.5.4, scipy 1.18.1, matplotlib 3.11.2, pin 4.1.0,
-# torch 2.14.1+cpu). Either environment runs the non-pinocchio scripts;
-# pinocchio steps need `pin`, stage 2 needs torch.
-numpy
-scipy
-matplotlib
+# Requirements — recommended environment (tested)
+
+These pins are the venv that ran the full pipeline, including stage 2:
+
+numpy==2.5.4
+scipy==1.18.1
+matplotlib==3.11.2
 pin==4.1.0
+
 # NOTE: pip package `pin` provides `import pinocchio`.
 # Do NOT install PyPI package `pinocchio` (unrelated nose-test plugin).
+# Pinocchio steps (identify.py, psd_constrained.py, residual_analysis.py)
+# need `pin`; the remaining scripts run without it.
+
 # Torch, CPU-only (only for stage2_slow.py). Install separately:
-#   TMPDIR=<dir-on-large-disk> pip install torch --index-url https://download.pytorch.org/whl/cpu
+#   TMPDIR=<dir-on-large-disk> pip install torch==2.14.1+cpu --index-url https://download.pytorch.org/whl/cpu
 # (pip's default temp dir may be a small tmpfs; a 512M /tmp once killed
 # this install with ENOSPC.)
+
+# Alternative environment that also ran the non-torch parts: system
+# python3 with numpy 1.26.4, scipy 1.11.4, matplotlib 3.6.3. The
+# pipeline ran on both numpy 1.26.4 and 2.5.4; the pins above are the
+# recommended set, not the only set that works.

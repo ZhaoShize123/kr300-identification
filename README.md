@@ -30,7 +30,8 @@ negative result, not a delivered model. The delivered model is
 
 ## Pipeline (run in this order)
 
-1. Download + verify data — see `DATA.md`. Put the 12 raw
+1. Download + verify data — run `download_data.py` (or see `DATA.md`
+   for manual steps). Extract the raw-data archive and put the 12 raw
    `recording_*.mat` files in `data/raw_data/`.
 2. `filter_causal.py` → `filtered_causal.npz` (causal 2 Hz Butterworth,
    per-trajectory steady-state init, decimate ×25 to 10 Hz).
@@ -57,15 +58,22 @@ clone; no computation was altered:
 All other scripts already used script-dir-relative paths.
 
 ## What is in here, and what is deliberately not
-- Included: all 12 pipeline scripts, `kr300_model.py`, result JSONs,
-  model-parameter `.npz` files, `stage2_models.pt`, figures (PNGs are
-  historical artifacts; all new figures are SVG), `logs/`,
-  `conversation/conversation.md`, `SKILL.md`, `DATA.md`.
-- Excluded: the raw dataset (`.rar`, `extracted/`, `data/` contents)
-  and the regenerable data-bearing arrays (`filtered_causal.npz`,
-  `residuals.npz`, `residuals_corrected.npz`, `stage1_e1.npz`) — see
-  `DATA.md` for download + MD5 + regeneration. Also excluded: virtual
-  environments and `__pycache__`.
+- In this GitHub snapshot (text files only — the upload connection
+  accepts text, not binaries): all 12 pipeline scripts plus
+  `download_data.py`, result JSONs, `CODE.md` (per-script guide),
+  `SKILL.md`, `DATA.md`, `logs/`, `conversation/conversation.md`,
+  and the SVG figures. The PNG figures are historical artifacts and
+  are NOT in this snapshot.
+- NOT in this snapshot, held back only by the text-only upload
+  limit (all are pipeline OUTPUTS, never inputs, and regenerate by
+  running the pipeline order above): model-parameter `.npz` files,
+  `stage2_models.pt`, the PNG figures, and the regenerable
+  data-bearing arrays (`filtered_causal.npz`, `residuals.npz`,
+  `residuals_corrected.npz`, `stage1_e1.npz`) — see `DATA.md` for
+  download + MD5 + regeneration. The author's local package retains
+  these binaries. Also excluded: the raw dataset (`.rar`,
+  `extracted/`, `data/` contents), virtual environments, and
+  `__pycache__`.
 - `data/` contains only a tracked `.gitkeep` placeholder; put raw
   `.mat` files in `data/raw_data/` (ignored by git).
 
