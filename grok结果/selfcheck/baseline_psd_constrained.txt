@@ -1,0 +1,13 @@
+computing Y ...
+iter 0: train RMSE (pi only, fric/hyd fixed) 4.3710, min eig [ 0.     -0.7589 -0.1342 -0.0637 -0.0407 -0.0425]
+iter 100: train RMSE (pi only, fric/hyd fixed) 1.4305, min eig [ 0.      0.0642 -0.0002 -0.0004 -0.0009 -0.0007]
+iter 200: train RMSE (pi only, fric/hyd fixed) 1.3667, min eig [ 0.     -0.     -0.0003 -0.0004 -0.0001 -0.    ]
+iter 300: train RMSE (pi only, fric/hyd fixed) 1.3451, min eig [ 0.     -0.     -0.0002 -0.0002 -0.0001 -0.0001]
+iter 400: train RMSE (pi only, fric/hyd fixed) 1.3320, min eig [ 0.     -0.     -0.0002 -0.0001 -0.0001 -0.0001]
+iter 500: train RMSE (pi only, fric/hyd fixed) 1.3272, min eig [ 0.     -0.     -0.0002 -0.0001 -0.0001 -0.0001]
+iter 600: train RMSE (pi only, fric/hyd fixed) 1.3351, min eig [ 0.     -0.0001 -0.0002 -0.0001 -0.0001 -0.0001]
+iter 700: train RMSE (pi only, fric/hyd fixed) 1.3546, min eig [ 0.     -0.0002 -0.0002 -0.0001 -0.0001 -0.0001]
+iter 799: train RMSE (pi only, fric/hyd fixed) 1.3735, min eig [ 0.     -0.0002 -0.0001 -0.0001 -0.0001 -0.0001]
+PSD-constrained train {'rmse_Nm': 1.2360973781711868, 'nrmse': 0.5421960246027268, 'r2': 0.6911752881258707} test {'rmse_Nm': 1.205385501378423, 'nrmse': 0.5680392639750095, 'r2': 0.664052189890232}
+min eig [1.0000000000000001e-21, -0.00018601766425679566, -0.00013058309062697926, -0.00011009408731291583, -9.413702069852594e-05, -6.361115764463216e-05]
+wrote psd_constrained.json and test_fit_psd_constrained.png

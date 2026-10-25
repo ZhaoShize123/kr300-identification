@@ -1,0 +1,16 @@
+computing Y train/test ...
+Y shapes (40015, 6, 60) (3637, 6, 60)
+iter 0: train RMSE 1.0974 Nm, r=[1.    0.99  1.004 0.2   1.126 2.411], theta change inf
+iter 1: train RMSE 1.0910 Nm, r=[1.    0.985 1.007 0.2   1.127 2.88 ], theta change 1.36e+01
+iter 2: train RMSE 1.0906 Nm, r=[1.    0.98  1.01  0.2   1.128 3.304], theta change 1.04e+00
+iter 3: train RMSE 1.0902 Nm, r=[1.    0.976 1.013 0.2   1.129 3.707], theta change 9.13e-01
+iter 4: train RMSE 1.0900 Nm, r=[1.    0.972 1.016 0.2   1.13  4.086], theta change 8.21e-01
+iter 5: train RMSE 1.0897 Nm, r=[1.    0.969 1.018 0.2   1.13  4.472], theta change 7.42e-01
+iter 6: train RMSE 1.0895 Nm, r=[1.    0.966 1.02  0.2   1.131 4.858], theta change 6.76e-01
+iter 7: train RMSE 1.0894 Nm, r=[1.    0.963 1.022 0.2   1.131 5.   ], theta change 6.17e-01
+iter 8: train RMSE 1.0897 Nm, r=[1.    0.96  1.024 0.2   1.131 5.   ], theta change 5.36e-01
+iter 9: train RMSE 1.0896 Nm, r=[1.    0.958 1.026 0.2   1.131 5.   ], theta change 4.81e-01
+pre-PSD train {'rmse_Nm': 1.0076038554655753, 'nrmse': 0.46453800429590264, 'r2': 0.7711079051613261} test {'rmse_Nm': 1.016547912807884, 'nrmse': 0.4972428768633154, 'r2': 0.7402283310648571}
+PSD info [{'link': 1, 'eig_min_before': 0.0, 'eig_max': 0.0, 'n_clipped': 6, 'fro_change': 2.4494897427831785e-21}, {'link': 2, 'eig_min_before': -5.426166016017521, 'eig_max': 9.190145599149414, 'n_clipped': 4, 'fro_change': 5.74150886412578}, {'link': 3, 'eig_min_before': -3.9352431473428853, 'eig_max': 9.021092303716399, 'n_clipped': 2, 'fro_change': 4.131860272668721}, {'link': 4, 'eig_min_before': -3.0647529330411456, 'eig_max': 3.087661576144965, 'n_clipped': 4, 'fro_change': 4.302637099196724}, {'link': 5, 'eig_min_before': -1.1038690578843153, 'eig_max': 1.3789006940112694, 'n_clipped': 3, 'fro_change': 1.4124070319268667}, {'link': 6, 'eig_min_before': -0.9043082305036989, 'eig_max': 0.9124968075090183, 'n_clipped': 4, 'fro_change': 1.2728112619743932}]
+post-PSD train {'rmse_Nm': 1.2678057337077064, 'nrmse': 0.552148926100724, 'r2': 0.6803606279604528} test {'rmse_Nm': 1.2024471349495085, 'nrmse': 0.568010283754557, 'r2': 0.6639104709478972}
+wrote identification.json and test_fit.png

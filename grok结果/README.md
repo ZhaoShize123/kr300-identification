@@ -1,30 +1,44 @@
 # grok结果
 
-这里是在仓库原始代码之上补充的复现记录和三阶段级联实验，由 Grok Bot 在 Linux 机器上完成（Python + numpy，不依赖 sklearn 或 PyTorch）。
+在仓库原始代码之上补充的**物理基线复现**与**冻结式三阶段级联实验**（纯逆动力学，不使用实测扭矩历史），由 Grok Bot 完成。全部可从空目录一键复现。
 
-## 内容
-- `baseline_repro_logs/`：完整跑通仓库原始流程得到的物理基线日志。基线是 PSD 加 J1 事后修正，共 94 个参数。轨迹 12 的 macro RMSE 为 1.0288，各关节为 0.953、1.846、1.334、0.645、0.753、0.642。
-- `three_stage/`：冻结式三阶段级联及四组消融，全部为纯逆动力学，不使用实测扭矩历史。
-  - `freeze.json` 和 `freeze.sha256`：预注册的配置、数据划分、评价指标和随机种子（sha256 `fba00a67…ece8ed`）。
-  - `run.py`：主实验。阶段 1 是 PSD 物理模型加可解释特征；阶段 2 是 numpy 实现的 GRU，只用运动段计算损失，但沿整条轨迹运行，训练后冻结；阶段 3 是只在慢速段训练的残差模型，有 GRU 和滑动历史时间窗两个版本，最终输出 τ = τ2 + m_slow·r3。
-  - `analyze.py`：汇总结果，并逐折做配对比较。
-  - `results.json`、`summary.txt`、`run.log`：原始结果和运行日志。
+## 目录
+| 路径 | 内容 |
+|---|---|
+| [`reproduce.sh`](reproduce.sh) | 一键复现：下载数据 → 物理基线 → 三阶段 → 汇总 |
+| [`REPRODUCE.md`](REPRODUCE.md) | 逐步命令、预期数值、SHA256、自检记录 |
+| [`docs/CODE_GUIDE.md`](docs/CODE_GUIDE.md) | 逐文件详细代码说明（公式、参数、调用关系图） |
+| [`env/`](env/) | 环境锁定：`requirements-lock.txt`（pip freeze）、`ENVIRONMENT.md`（OS/Python） |
+| [`conversation/`](conversation/) | 对话记录与 [`INDEX.md`](conversation/INDEX.md)（对话段落 → 文件/提交） |
+| [`three_stage/`](three_stage/) | `run.py` 主实验、`analyze.py` 汇总、`freeze.json`+`freeze.sha256` 预注册配置、`results.json`/`summary.txt`/`run.log` 结果 |
+| [`baseline_repro_logs/`](baseline_repro_logs/) | 第一次跑通物理基线的 6 份日志 |
+| [`selfcheck/`](selfcheck/) | 在全新克隆中运行 reproduce.sh 的日志与 summary |
 
-## 复现方法
-1. 先在仓库根目录按原 README 下载数据，并依次运行 filter_causal → phase_calibration → identify → psd_constrained。
-2. 把 psd_constrained 的输出复制为 `final_psd*`。原 README 的运行顺序有误，而且 `final_psd_params.npz` 从未被生成，所以需要这一步。
-3. 依次运行 residual_analysis → redo_identify_j1。
-4. 运行 `python grok结果/three_stage/run.py`，再运行 `analyze.py`。运行时会生成约 360 MB 的中间文件 `Y_*.npz`，这些文件没有上传。
+## 快速复现
+```bash
+git clone https://github.com/ZhaoShize123/kr300-identification.git
+cd kr300-identification
+bash grok结果/reproduce.sh      # 需 python3、unar；约 1.5 小时（8 核 CPU）
+git diff grok结果/three_stage/summary.txt   # 无输出 = 与提交结果逐字一致
+```
 
-## 主要结论（交叉验证为轨迹 1–11 的五折；轨迹 12 只做描述，不参与模型选择）
+## 主要结论
+物理基线（PSD + J1 事后修正，94 参数）：轨迹 12 macro RMSE **1.0288**（各关节 0.953 / 1.846 / 1.334 / 0.645 / 0.753 / 0.642）。
 
-| 组别 | 整体 RMSE | 慢速段 RMSE |
-|---|---|---|
-| G1 物理 | 1.037 | 2.054 |
-| G2 物理+慢速（GRU / 时间窗） | 0.956 / 1.008 | 1.829 / 1.978 |
-| G3 物理+阶段 2 | 0.964 | 2.162 |
-| G4 全部（GRU / 时间窗） | 0.825 / 0.848 | 1.806 / 1.868 |
+三阶段五折 CV（轨迹 1–11 按录制分组；3 个种子平均；轨迹 12 只做描述）：
 
-- 预注册的判据是整体指标上 G4 逐折都优于 G2。GRU 和时间窗两个版本都 5/5 通过，但这个比较有混杂：G4 的优势里包含了阶段 2 对运动段的修正。
-- 事后只比较慢速段：GRU 版本 4/5 折获胜，未通过；时间窗版本 5/5 折获胜，平均差值为 −0.110。若要把它作为正式结论，需要重新冻结一个以慢速段为判据的方案。
-- 局限：dwell 层与 slow 层完全相同；慢速阈值 0.05 rad/s 沿用仓库设置；阶段 2 和阶段 3 的训练目标是样本内的。
+| 组别 | 整体 RMSE | 慢速段 RMSE | traj12 整体 |
+|---|---|---|---|
+| G1 物理 | 1.0373 | 2.0544 | 1.0288 |
+| G2-GRU 物理+慢速 | 0.9557 | 1.8285 | 0.9577 |
+| G2-Win | 1.0077 | 1.9777 | 0.9753 |
+| G3 物理+阶段2 | 0.9639 | 2.1621 | 0.9315 |
+| G4-GRU 全部 | 0.8251 | 1.8062 | 0.8371 |
+| G4-Win | 0.8476 | 1.8676 | 0.8510 |
+
+- 预注册判据（整体，G4 每折优于 G2）：GRU 与时间窗都 5/5 通过；但有混杂——G4 的优势包含阶段 2 对运动段的修正。
+- 事后只看慢速段：GRU 4/5（未通过），时间窗 5/5、均值 −0.110。要作为正式结论需重新冻结以慢速段为判据的方案。
+- 局限：dwell 层与 slow 层相同；慢速阈值 0.05 rad/s 沿用仓库；阶段 2/3 训练目标为样本内。
+
+## 未入库
+`three_stage/Y_*.npz`（约 360 MB，run.py 自动生成）、原始数据 `data/`、根目录被重新生成的 json/npz（与仓库原文件逐位一致或属中间产物）。
