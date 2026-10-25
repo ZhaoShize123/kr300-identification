@@ -1,0 +1,6 @@
+three_stage/Y_*.npz
+three_stage/*.npz
+data/
+__pycache__/
+*.pyc
+selfcheck/*.log.tmp

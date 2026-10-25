@@ -1,4 +1,5 @@
-import json, numpy as np
+import json, os, numpy as np
+os.chdir(os.path.dirname(os.path.abspath(__file__)))  # 结果文件与脚本同目录
 R = json.load(open('results.json')); G = ['G1','G2-GRU','G2-Win','G3','G4-GRU','G4-Win']; S = [0,1,2]; ST = ['overall','motion','slow','dwell']
 def get(key, g, st): return R['cv'][key][g][st]
 L = []

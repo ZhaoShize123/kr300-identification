@@ -1,7 +1,7 @@
 """Frozen three-stage cascade ablation (see freeze.json). Pure inverse dynamics."""
 import json, os, sys, time, hashlib
 import numpy as np, torch
-REPO = '/workspace/kr300-identification'; sys.path.insert(0, REPO)
+REPO = os.environ.get('KR300_REPO', os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))); sys.path.insert(0, REPO)  # 仓库根目录（grok结果/three_stage 的上两级）
 from identify import compute_Y, build_normal_eq, fista, predict, friction_basis, hyd_basis
 from psd_constrained import psd_proj_pi, box_clip_pi
 OUT = os.path.dirname(os.path.abspath(__file__)); torch.set_num_threads(8)
