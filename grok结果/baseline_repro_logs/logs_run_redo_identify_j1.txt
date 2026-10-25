@@ -1,0 +1,12 @@
+computing Y train/test ...
+post-hoc d = 11.9566
+iter 0: d 11.9566 -> 11.9566, r [1.    0.545 1.051 0.2   1.166 5.   ]
+iter 1: d 11.9566 -> 11.9566, r [1.    0.545 1.051 0.2   1.166 5.   ]
+joint-refit train mean {'rmse_Nm': 1.0652758783270133, 'nrmse': 0.48180523357434196, 'r2': 0.7570476175471138}
+joint-refit test  mean {'rmse_Nm': 1.030099270676812, 'nrmse': 0.5025206656320756, 'r2': 0.7362504620265891}
+joint-refit test  J1   {'rmse_Nm': 0.9524538140824376, 'nrmse': 0.354474126699219, 'r2': 0.874348093500826}
+posthoc     test  mean {'rmse_Nm': 1.0288440726212202, 'nrmse': 0.5023359533685747, 'r2': 0.7365522430442716} J1 {'rmse_Nm': 0.952827099346092, 'nrmse': 0.3546130520370015, 'r2': 0.8742495833250028}
+J1 corrected train: corr res~qdd -0.000, slope -0.000
+J1 corrected test: corr res~qdd -0.030, slope -0.191
+saved j1_correction.json / j1_correction_params.npz
+saved test_fit_j1_corrected.png, j1_residual_vs_qdd.png

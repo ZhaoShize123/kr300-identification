@@ -1,0 +1,34 @@
+computing Y train ...
+train resid RMSE per joint: [2.2   1.675 1.49  0.682 0.678 0.692]
+test resid RMSE per joint: [2.012 1.846 1.334 0.645 0.753 0.642]
+
+== train ==
+J1: q_j -0.641  qd_j -0.000  qdd_j +0.899  abs_qd_j +0.032  tau_j +0.426  seg_index -0.009  global_time -0.009  t_in_seg +0.003  dist_to_boundary +0.037  slow_flag -0.055  lag1_autocorr +0.994
+J2: q_j -0.000  qd_j +0.001  qdd_j -0.116  abs_qd_j +0.094  tau_j +0.374  seg_index +0.046  global_time +0.047  t_in_seg +0.051  dist_to_boundary +0.235  slow_flag -0.345  lag1_autocorr +0.992
+J3: q_j -0.113  qd_j -0.000  qdd_j +0.130  abs_qd_j +0.077  tau_j +0.443  seg_index -0.027  global_time -0.021  t_in_seg +0.385  dist_to_boundary +0.123  slow_flag -0.194  lag1_autocorr +0.993
+J4: q_j -0.168  qd_j +0.000  qdd_j +0.220  abs_qd_j +0.019  tau_j +0.608  seg_index -0.014  global_time -0.014  t_in_seg +0.020  dist_to_boundary +0.022  slow_flag +0.019  lag1_autocorr +0.991
+J5: q_j -0.086  qd_j +0.000  qdd_j +0.119  abs_qd_j -0.031  tau_j +0.502  seg_index +0.059  global_time +0.060  t_in_seg +0.069  dist_to_boundary -0.034  slow_flag +0.031  lag1_autocorr +0.995
+J6: q_j -0.092  qd_j -0.000  qdd_j +0.159  abs_qd_j +0.020  tau_j +0.492  seg_index +0.019  global_time +0.018  t_in_seg -0.029  dist_to_boundary +0.032  slow_flag -0.041  lag1_autocorr +0.994
+  slow: frac 0.176 SSE share 0.481 RMSE [1.57 3.39 3.36 0.81 1.55 1.59]
+  moving: frac 0.824 SSE share 0.519 RMSE [2.31 0.98 0.54 0.65 0.21 0.2 ]
+  seg_start_2.5s: frac 0.041 SSE share 0.155 RMSE [1.38 4.34 3.8  0.87 1.75 1.84]
+  seg_end_2.5s: frac 0.041 SSE share 0.106 RMSE [1.79 2.99 2.98 0.96 1.82 1.94]
+  seg_middle: frac 0.918 SSE share 0.739 RMSE [2.25 1.34 1.17 0.66 0.46 0.45]
+  window means start/end/mid: {'start': [-0.57, -3.86, -2.14, 0.13, 0.13, -0.13], 'end': [-0.25, -1.93, 1.23, 0.13, 0.31, -0.19], 'middle': [0.04, 0.26, 0.04, -0.01, -0.02, 0.01], 'slow': [-0.26, -1.25, -0.63, 0.03, 0.04, -0.06], 'moving': [0.06, 0.27, 0.13, -0.01, -0.01, 0.01]}
+
+== test ==
+J1: q_j -0.646  qd_j -0.068  qdd_j +0.881  abs_qd_j +0.030  tau_j +0.385  seg_index +0.014  global_time +0.007  t_in_seg -0.043  dist_to_boundary +0.033  slow_flag -0.028  lag1_autocorr +0.994
+J2: q_j -0.141  qd_j -0.013  qdd_j -0.109  abs_qd_j -0.168  tau_j +0.325  seg_index -0.037  global_time -0.061  t_in_seg -0.149  dist_to_boundary -0.145  slow_flag +0.107  lag1_autocorr +0.995
+J3: q_j -0.113  qd_j -0.070  qdd_j +0.169  abs_qd_j +0.087  tau_j +0.399  seg_index -0.018  global_time +0.058  t_in_seg +0.456  dist_to_boundary +0.083  slow_flag -0.138  lag1_autocorr +0.992
+J4: q_j -0.156  qd_j -0.059  qdd_j +0.252  abs_qd_j +0.129  tau_j +0.562  seg_index +0.140  global_time +0.151  t_in_seg +0.075  dist_to_boundary +0.230  slow_flag -0.297  lag1_autocorr +0.989
+J5: q_j -0.101  qd_j -0.045  qdd_j +0.121  abs_qd_j +0.107  tau_j +0.583  seg_index -0.004  global_time -0.018  t_in_seg -0.085  dist_to_boundary +0.184  slow_flag -0.276  lag1_autocorr +0.996
+J6: q_j -0.078  qd_j -0.083  qdd_j +0.158  abs_qd_j +0.104  tau_j +0.418  seg_index +0.068  global_time +0.052  t_in_seg -0.090  dist_to_boundary +0.163  slow_flag -0.227  lag1_autocorr +0.992
+  slow: frac 0.169 SSE share 0.552 RMSE [1.8  4.02 3.04 0.83 1.77 1.49]
+  moving: frac 0.831 SSE share 0.448 RMSE [2.05 0.9  0.52 0.6  0.21 0.21]
+  seg_start_2.5s: frac 0.041 SSE share 0.178 RMSE [1.74 5.24 2.74 0.9  2.03 1.7 ]
+  seg_end_2.5s: frac 0.041 SSE share 0.126 RMSE [1.96 3.3  3.04 0.96 2.15 1.72]
+  seg_middle: frac 0.918 SSE share 0.696 RMSE [2.03 1.41 1.09 0.61 0.47 0.43]
+  window means start/end/mid: {'start': [-0.22, 0.85, -1.85, -0.6, -1.02, -1.38], 'end': [-0.58, -0.25, 2.21, -0.32, -0.93, -0.94], 'middle': [0.03, 0.4, -0.05, 0.08, -0.02, 0.05], 'slow': [-0.13, 0.82, -0.44, -0.39, -0.56, -0.37], 'moving': [0.02, 0.31, 0.05, 0.12, -0.01, 0.02]}
+
+saved residuals.npz, residual_analysis.json
+saved residual_test_timeseries.png, residual_correlation_heatmap.png, residual_vs_segment_position.png
