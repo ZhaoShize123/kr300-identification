@@ -113,7 +113,13 @@ Pre-projection inertias are genuinely non-PSD (min eigenvalues
 L2 −5.43 … L6 −0.90); after projection min ≈ −7e-05.
 
 - Inputs: `identification_params.npz`, `filtered_causal.npz`.
-- Outputs: `final_psd.json`, `final_psd_params.npz`.
+- Outputs: `final_psd.json`, `psd_constrained_params.npz`.
+- Naming gap (found by independent reproduction 2026-10-25): §6–§7
+  load `final_psd_params.npz`, which no script writes. Before running
+  them, copy `psd_constrained_params.npz` → `final_psd_params.npz`
+  (see README Pipeline step 4). The original work-directory file
+  differs from a fresh run by ≤1.1e-3 (FISTA stopping); headlines
+  unaffected at reported precision.
 - Headline (test): mean NRMSE 0.568 / R² 0.664. PSD costs mostly
   joint 1 (test R² 0.898 → 0.439); train/test stay close everywhere
   (no obvious overfitting).

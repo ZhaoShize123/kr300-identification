@@ -209,3 +209,23 @@ criteria never silently relaxed.
 - Second snapshot push: this commit, on main, following
   5b3b0c14a9. Binaries remain off GitHub (same connector limit)
   and remain regenerable outputs of the pipeline.
+
+### 17. Grok independent reproduction + psd filename gap fix (2026-10-25)
+- Grok Bot pushed `grok结果/` to main (commit
+  0e80932adf26880c6da2684f7929dbc856266ae5, "Add grok结果: baseline
+  repro logs and frozen three-stage cascade experiments"): 6 baseline
+  reproduction logs + frozen three-stage cascade (freeze.json sha256
+  fba00a67…ece8ed, 5-fold grouped-by-recording CV, 3 seeds).
+  Baseline reproduction verified exact against this repo's numbers
+  (PSD+J1 test 1.0288, joints 0.953/1.846/1.334/0.645/0.753/0.642;
+  pre/post-PSD 0.497/0.740, 0.568/0.664).
+- Gap Grok found (real): `psd_constrained.py` writes
+  `psd_constrained_params.npz`, but `residual_analysis.py` /
+  `redo_identify_j1.py` load `final_psd_params.npz` — the documented
+  pipeline never produced that file. The work-directory
+  `final_psd_params.npz` differs from a fresh psd run by ≤1.1e-3
+  (FISTA stopping); headlines unaffected at reported precision.
+- Fix in this commit (docs only, no computation changed): README
+  Pipeline step 4 + file index, CODE.md §5, DATA.md regeneration
+  list now state the copy step explicitly. Grok's `grok结果/` files
+  are a separate writer's commit and are untouched by this push.

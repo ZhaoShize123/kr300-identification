@@ -38,6 +38,11 @@ and are regenerable); run the scripts in README order to recreate
 them:
 - `filtered_causal.npz` ← `filter_causal.py` (expect train 40,015 /
   test 3,637 samples @ 10 Hz)
+- `final_psd_params.npz` ← copy of `psd_constrained_params.npz` after
+  running `psd_constrained.py` (no script writes this name; see README
+  Pipeline step 4 — gap found by independent reproduction 2026-10-25;
+  a fresh copy differs from the original work-directory file by
+  ≤1.1e-3, headlines unaffected)
 - `residuals.npz` ← `residual_analysis.py` (PSD-model residuals)
 - `residuals_corrected.npz` ← `residual_plots_corrected.py`
 - `stage1_e1.npz` ← `stage1_motion.py` (stage-1 residuals, input to

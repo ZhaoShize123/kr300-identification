@@ -39,6 +39,14 @@ negative result, not a delivered model. The delivered model is
    calibration curve is flat, see SKILL.md §2).
 4. `kr300_model.py` + `identify.py` → `identification.json`,
    then `psd_constrained.py` → `final_psd.json` (delivered physics).
+   NOTE (gap found by an independent reproduction, 2026-10-25):
+   `psd_constrained.py` writes `psd_constrained_params.npz`, but steps
+   5–6 load `final_psd_params.npz` — no script produces that name.
+   Copy it before running steps 5–6 (same directory):
+   `cp psd_constrained_params.npz final_psd_params.npz`.
+   The original work-directory file differs from a fresh psd run by
+   ≤1.1e-3 (FISTA stopping point); headline numbers are unaffected
+   at reported precision.
 5. `redo_identify_j1.py` → `j1_correction.json` (delivered J1 term;
    `j1_correction_params.npz` is the joint-refit variant and is NOT
    the delivered model).
@@ -100,7 +108,8 @@ matplotlib 3.11.2, pin 4.1.0, torch 2.14.1+cpu).
   `identification.json`, `identification_params.npz`,
   `psd_constrained.py`, `psd_constrained.json`,
   `psd_constrained_params.npz`, `final_psd.json`,
-  `final_psd_params.npz`, `test_fit*.png`
+  `final_psd_params.npz` (copy of the above, see Pipeline step 4),
+  `test_fit*.png`
 - J1 correction: `redo_identify_j1.py`, `j1_correction.json`,
   `j1_correction_posthoc_params.npz` (delivered),
   `j1_correction_params.npz` (not delivered),
